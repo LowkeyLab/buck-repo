@@ -1,0 +1,11 @@
+# Buck2 build outputs
+/buck-out/
+
+# Nix/direnv local artifacts
+/.direnv/
+/result
+/result-*
+
+# Rust/editor local artifacts
+/target/
+*.rs.bk
