@@ -1,5 +1,5 @@
 {
-  description = "Minimal Rust project built with Buck2 in a Nix dev shell";
+  description = "Minimal Haskell project built with Buck2 in a Nix dev shell";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
@@ -20,11 +20,7 @@
         default = pkgs.mkShell {
           packages = with pkgs; [
             buck2
-            cargo
-            clang
-            lld
-            rustc
-            rustfmt
+            ghc
           ];
         };
       });

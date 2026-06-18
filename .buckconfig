@@ -24,4 +24,4 @@ target_platform_detector_spec = target:root//...->prelude//platforms:default \
 execution_platforms = prelude//platforms:default
 
 [buildfile]
-name = BUCK.v2
+name = BUCK

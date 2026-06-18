@@ -1,6 +1,6 @@
-# Buck2 Rust Nix Scaffold
+# Buck2 Haskell Nix Scaffold
 
-This repository is a minimal Rust example intended to be built with Buck2 from a Nix flake development shell.
+This repository is a minimal Haskell example intended to be built with Buck2 from a Nix flake development shell.
 
 ## Development shell
 
@@ -10,16 +10,14 @@ Enter the shell with:
 nix develop
 ```
 
-The shell provides:
+The shell provides the tooling needed for this scaffold, including:
 
 - `buck2`
-- `rustc`
-- `cargo`
-- `rustfmt`
-- `clang` / `clang++`
-- `lld` / `ld.lld`
+- `ghc`
+- `ghc-pkg`
+- `haddock`
 
-`clang` and `lld` are included because Buck2's bundled demo Rust toolchain expects system compiler/linker tools for this minimal local scaffold.
+These tools are used by Buck2's bundled demo Haskell toolchain for minimal local experimentation. The demo toolchain is suitable for scaffolding, but it is not a production-grade Haskell toolchain policy.
 
 ## Optional direnv integration
 
@@ -33,25 +31,23 @@ The `.envrc` uses `use flake`, so direnv will load the same Nix development shel
 
 ## Build
 
-Build the example Rust binary with:
+Build the example Haskell binary with:
 
 ```sh
-buck2 build //:main --show-output
+nix develop -c buck2 build //haskell_hello_world:main --show-output
 ```
 
-The target is defined in `BUCK.v2` and points at `src/main.rs`.
-
-This scaffold uses Buck2's bundled prelude and demo toolchain definitions in `toolchains/BUCK.v2` via `system_demo_toolchains()`. Those demo toolchains are suitable for minimal scaffolding and local experimentation, but they are not a production-grade toolchain policy.
+The target is defined in `haskell_hello_world/BUCK` and points at `haskell_hello_world/Main.hs`.
 
 ## Validation commands
 
-Run these checks from the repository root:
+Run these checks from the repository root when validating the scaffold:
 
 ```sh
 nix flake check
-nix develop -c buck2 --version
-nix develop -c rustc --version
-nix develop -c sh -c 'command -v clang++ && command -v ld.lld'
-nix develop -c buck2 build //:main --show-output
+nix develop -c ghc --version
+nix develop -c ghc-pkg --version
+nix develop -c haddock --version
+nix develop -c buck2 build //haskell_hello_world:main --show-output
 git diff --check
 ```
