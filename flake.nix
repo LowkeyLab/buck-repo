@@ -19,8 +19,10 @@
       devShells = forAllSystems (pkgs: {
         default = pkgs.mkShell {
           packages = with pkgs; [
+            bash
             buck2
             ghc
+            python3
           ];
         };
       });

@@ -2,4 +2,9 @@ haskell_binary(
     name = "main",
     srcs = ["Main.hs"],
     main = "Main",
+    link_style = "static",
+    deps = [
+        "//haskell:aeson",
+        "//haskell:base",
+    ],
 )

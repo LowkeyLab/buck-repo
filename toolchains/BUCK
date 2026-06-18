@@ -1,3 +1,41 @@
-load("@prelude//toolchains:demo.bzl", "system_demo_toolchains")
+load("@prelude//toolchains:cxx.bzl", "system_cxx_toolchain")
+load("@prelude//toolchains:genrule.bzl", "system_genrule_toolchain")
+load("@prelude//toolchains:python.bzl", "system_python_bootstrap_toolchain")
+load(":nix.bzl", "nix")
+load(":nix_haskell_toolchain.bzl", "nix_haskell_toolchain")
 
-system_demo_toolchains()
+system_cxx_toolchain(
+    name = "cxx",
+    visibility = ["PUBLIC"],
+)
+
+system_genrule_toolchain(
+    name = "genrule",
+    visibility = ["PUBLIC"],
+)
+
+system_python_bootstrap_toolchain(
+    name = "python_bootstrap",
+    interpreter = "python3",
+    visibility = ["PUBLIC"],
+)
+
+nix_haskell_toolchain(
+    name = "haskell",
+    visibility = ["PUBLIC"],
+)
+
+nix.rules.flake(
+    name = "ghc",
+    binary = "ghc",
+    binaries = ["ghc-pkg"],
+    flake = "nix",
+    visibility = ["PUBLIC"],
+)
+
+nix.rules.flake(
+    name = "haddock",
+    binary = "haddock",
+    flake = "nix",
+    visibility = ["PUBLIC"],
+)
