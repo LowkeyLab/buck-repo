@@ -4,6 +4,8 @@
 
 
 toolchain_libraries = [
+    "QuickCheck",
     "aeson",
     "base",
+    "hspec",
 ]

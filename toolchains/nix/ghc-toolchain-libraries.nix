@@ -4,6 +4,8 @@
 
 
 [
+  "QuickCheck"
   "aeson"
   "base"
+  "hspec"
 ]
